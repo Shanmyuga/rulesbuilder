@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<notificationData>
+    <alertMessage>TEST message</alertMessage>
+    <alertType>EMAIL</alertType>
+    <description>Alert Cigna Commercial Claims based on Reject claims during the prescribed interval</description>
+    <freqInterval>EVERY_15_MIN</freqInterval>
+    <name>Cigna Commerical Claims Reject Claim Alert</name>
+    <rules>
+        <conditions>
+            <field>clientOrgID</field>
+            <operation>==</operation>
+            <value>2107</value>
+        </conditions>
+        <conditions>
+            <field>channelCode</field>
+            <operation>==</operation>
+            <value>R</value>
+        </conditions>
+        <name>CIGNA_COMMERICAL_CLAIM_COUNT</name>
+        <notificationKey>TOTAL_COUNT</notificationKey>
+    </rules>
+    <rules>
+        <conditions>
+            <field>clientOrgID</field>
+            <operation>==</operation>
+            <value>"2107"</value>
+        </conditions>
+        <conditions>
+            <field>channelCode</field>
+            <operation>==</operation>
+            <value>R</value>
+        </conditions>
+        <conditions>
+            <field>clmAcceptCode</field>
+            <operation>==</operation>
+            <value>N</value>
+        </conditions>
+        <name>CIGNA_COMMERICAL_CLAIM_REJECT_COUNT</name>
+        <notificationKey>TOTAL_REJECT_COUNT</notificationKey>
+    </rules>
+    <trigger>
+        <args>REJECT_COUNT</args>
+        <args>TOTAL_COUNT</args>
+        <function>percent</function>
+        <operation>&gt;</operation>
+        <threshold>20</threshold>
+    </trigger>
+    <triggerCondition>percent(REJECT_COUNT/TOTAL_COUNT) &gt; 20 </triggerCondition>
+</notificationData>
